@@ -1,34 +1,30 @@
 # Políticas de reinicio
 
-**Para esta parte de la práctica**
-Se van a crear imágenes para probar cada una de las políticas de reinicio.
-Analice las instrucciones de cada Dockerfile 
-Use la imagen respectiva para crear y ejecutar el contenedor y observar lo que sucede verificando 
-el cumplimiento de la política de reinicio.
+## Para esta parte de la práctica
+1. Usa el archivo Dockerfile que se encuentra en cada carpeta con el nombre de la política de reinicio para crear una imagen. Analiza las instrucciones de cada Dockerfile 
+2. Usa la imagen para ejecutar un contenedor agregando la política respectiva y observar lo que sucede verificando el cumplimiento de la política de reinicio
 
-### restart = no
+### no
+No reinicia el contenedor bajo ninguna razón. Esta es la política por default
+```
+docker run -d --name <nombre contenedor> <nombre imagen>
+```
 
-No reinicia el contenedor bajo ninguna razón
-
-### restart = always
-
-Si se detiene manualmente, no se reinicia. El contenedor es iniciado nuevamente cuando el demonio (servicio) reinicia
-
+### always
+Reinicia siempre el contenedor si se detiene. Si se detiene manualmente, sólo se reiniciará cuando se reinicie el demonio Docker o cuando se reinicie manualmente el propio contenedor
 ```
 docker run -d --name <nombre contenedor> --restart always <nombre imagen>
 ```
 
-### restart = unless-stopped
+### unless-stopped
 
-Se reinicia siempre y cuando no se detenga manualmente
-
+Similar a always, excepto que cuando el contenedor se detiene (manualmente o de otra manera), no se reinicia incluso después de reiniciar el demonio Docker.
 ```
 docker run -d --name <nombre contenedor> --restart unless-stopped <nombre imagen>
 ```
 
-### restart = on-failure
-
-Se reinicia únicamente cuando hay una falla en la ejecución del código. No se reinicia si el contenedor se detiene manualmente.
+### on-failure
+Se reinicia únicamente cuando hay una falla en la ejecución del código que se manifiesta con un código diferente de 0. No se reinicia si el contenedor se detiene manualmente.
 
 ```
 docker run -d --name <nombre contenedor> --restart on-failure <nombre imagen>
