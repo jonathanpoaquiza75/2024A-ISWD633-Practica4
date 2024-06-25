@@ -9,8 +9,9 @@ Asignar núcleos de CPU específicos:
 --cpuset-cpus=<lista de núcleos>
 ```
 
-**¿Como saber el numero de procesadores virtuales que tiene una máquina?**
-## COMPLETAR
+**¿Como saber el número de procesadores virtuales que tiene una máquina?**
+## En Linux, en bash, con el comando: grep -c ^processor /proc/cpuinfo
+![alt text](image.png)
 
 ## Ejemplos
 _Puedes copiar y ejecutar directamente cada uno de los comandos_
