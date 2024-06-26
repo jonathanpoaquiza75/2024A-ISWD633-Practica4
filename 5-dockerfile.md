@@ -53,17 +53,24 @@ docker build -t <nombre imagen>:<version> .
 ### Ejecutar el archivo Dockerfile y construir una imagen en la versión 1.0
 _Puedes copiar y ejecutar directamente. No olvides verificar en qué directorio se encuentra el archivo Dockerfile
 ```
-
+docker build -t myimage:1.0 . 
 ```
 
 **¿Cuántos pasos se han ejecutado?**
-# RESPONDER 
-
+# 10 pasos
+![alt text](image-1.png)
 ### Inspeccionar la imagen creada
-# COMPLETAR CON UNA CAPTURA
+# docker inspect myimage:1.0
+![alt text](image-2.png)
 
+### El nombre de la imagen debe tener la etiqueta para poder inspeccionarla.
+
+![alt text](image-3.png)
+![alt text](image-4.png)
 **Modificar el archivo index.html para incluir su nombre**
-**¿Cuántos pasos se han ejecutado? ¿Observa algo diferente en la creación de la imagen**
+**¿Cuántos pasos se han ejecutado? ¿Observa algo diferente en la creación de la imagen?**
+# Se ejecutaron 10 pasos, sin embargo se realizaron de forma casi instantánea. Es prácticamente la misma imagen.
+![alt text](image-5.png)
 
 ## Mecanismo de caché
 Docker usa un mecanismo de caché cuando crea imágenes para acelerar el proceso de construcción y evitar la repetición de pasos que no han cambiado. Cada instrucción en un Dockerfile crea una capa en la imagen final. Docker intenta reutilizar las capas de una construcción anterior si no han cambiado, lo que reduce significativamente el tiempo de construcción.
@@ -75,14 +82,14 @@ Docker usa un mecanismo de caché cuando crea imágenes para acelerar el proceso
 
 ### Crear un contenedor a partir de las imagen creada, mapear todos los puertos
 ```
-
+docker run -d -P --name srv-myimage myimage:1.0
 ```
 
 ### ¿Con que puerto host se está realizando el mapeo?
-# COMPLETAR CON LA RESPUESTA
+# Con el especificado en el archivo .dockerfile: puerto 80/tcp
 
 **¿Qué es una imagen huérfana?**
-# COMPLETAR CON LA RESPUESTA
+# Es la imagen que no posee una etiqueta, que se crea cuando creamos una imagen con el mismo nombre y etiqueta, lo que provoca que la anterior se quede sin etiqueta.
 
 ### Identificar imágenes huérfanas
 ```
